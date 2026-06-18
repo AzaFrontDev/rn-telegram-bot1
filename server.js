@@ -55,12 +55,12 @@ bot.command('rules', (ctx) => {
 bot.command('roster', (ctx) => {
     const developer = ctx.from.username ? `@${ctx.from.username}` : 'Фронтенд-Мастер';
     
-    ctx.replyWithMarkdown(
-        `👥 *АКТУАЛЬНЫЙ СОСТАВ КЛАНА RN*\n\n` +
-        `👑 *Глава клана:* Acecarslen\n` +
-        `⭐ *Офицерский корпус:* Garou, Acecarslen, Hinderon\n\n` +
-        `💻 *Разработчик системы:* ${developer}\n\n` +
-        `⚔️ *Основной ростер:* Набор открыт через сайт. Все новые заявки падают напрямую офицерам.`
+    ctx.replyWithHTML(
+        `👥 <b>АКТУАЛЬНЫЙ СОСТАВ КЛАНА RN</b>\n\n` +
+        `👑 <b>Глава клана:</b> Acecarslen\n` +
+        `⭐ <b>Офицерский корпус:</b> Garou, Acecarslen, Hinderon\n\n` +
+        `💻 <b>Разработчик системы:</b> ${developer}\n\n` +
+        `⚔️ <b>Основной ростер:</b> Набор открыт через сайт. Все новые заявки падают напрямую офицерам.`
     );
 });
 
