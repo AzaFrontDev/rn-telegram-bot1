@@ -53,11 +53,13 @@ bot.command('rules', (ctx) => {
 
 // КОМАНДА: СОСТАВ КЛАНА
 bot.command('roster', (ctx) => {
+    const developer = ctx.from.username ? `@${ctx.from.username}` : 'Фронтенд-Мастер';
+    
     ctx.replyWithMarkdown(
         `👥 *АКТУАЛЬНЫЙ СОСТАВ КЛАНА RN*\n\n` +
         `👑 *Глава клана:* Acecarslen\n` +
         `⭐ *Офицерский корпус:* Garou, Acecarslen, Hinderon\n\n` +
-        `💻 *Разработчик системы:* @${ctx.from.username || 'Фронтенд-Мастер'}\n\n` +
+        `💻 *Разработчик системы:* ${developer}\n\n` +
         `⚔️ *Основной ростер:* Набор открыт через сайт. Все новые заявки падают напрямую офицерам.`
     );
 });
