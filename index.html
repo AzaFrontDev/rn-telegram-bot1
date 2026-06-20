@@ -99,22 +99,42 @@
     </div>
   </header>
 
-  <div id="orderModal" class="modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:1000; align-items:center; justify-content:center;">
-    <div class="modal-content" style="background:#1a1a1a; padding:30px; border-radius:8px; border: 1px solid #333; max-width:400px; width:100%; color:#fff; position:relative;">
+  <div id="orderModal" class="modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:1000; align-items:center; justify-content:center; padding: 20px;">
+    <div class="modal-content" style="background:#1a1a1a; padding:30px; border-radius:8px; border: 1px solid #333; max-width:500px; width:100%; color:#fff; position:relative; max-height: 90vh; overflow-y: auto;">
       <span id="closeModal" style="position:absolute; top:10px; right:15px; cursor:pointer; font-size:24px;">&times;</span>
       <h2 style="margin-top:0; font-family:'Tenor Sans', sans-serif; text-align:center;">Заявка в RN Clan</h2>
       
       <form id="applyForm" style="display:flex; flex-direction:column; gap:15px; margin-top:20px;">
-        <label style="display:flex; flex-direction:column; gap:5px;">Твой ник в игре:
-          <input type="text" id="userNick" required style="width:100%; padding:10px; background:#222; border:1px solid #444; color:#fff; border-radius:4px;">
+        
+        <label style="display:flex; flex-direction:column; gap:5px; font-size: 14px;">1) Ник в игре:
+          <input type="text" id="userNick" required placeholder="Ваш ник..." style="width:100%; padding:10px; background:#222; border:1px solid #444; color:#fff; border-radius:4px; font-family: inherit;">
         </label>
-        <label style="display:flex; flex-direction:column; gap:5px;">Твой скилл / Опыт:
-          <input type="text" id="userSkill" required style="width:100%; padding:10px; background:#222; border:1px solid #444; color:#fff; border-radius:4px;">
+
+        <label style="display:flex; flex-direction:column; gap:5px; font-size: 14px;">2) Возраст:
+          <input type="number" id="userAge" required placeholder="Сколько лет..." style="width:100%; padding:10px; background:#222; border:1px solid #444; color:#fff; border-radius:4px; font-family: inherit;">
         </label>
-        <label style="display:flex; flex-direction:column; gap:5px;">Твой Дискорд:
-          <input type="text" id="userDiscord" required style="width:100%; padding:10px; background:#222; border:1px solid #444; color:#fff; border-radius:4px;">
+
+        <label style="display:flex; flex-direction:column; gap:5px; font-size: 14px;">3) Количество киллов:
+          <input type="number" id="userKills" required placeholder="Точное число..." style="width:100%; padding:10px; background:#222; border:1px solid #444; color:#fff; border-radius:4px; font-family: inherit;">
         </label>
-        <button type="submit" style="padding:12px; background:#fff; color:#000; border:none; border-radius:4px; font-weight:bold; cursor:pointer; margin-top:10px;">Отправить офицерам</button>
+
+        <label style="display:flex; flex-direction:column; gap:5px; font-size: 14px;">4) Что вы, дерзкий подданный, намереваетесь творить в моем величественном клане?
+          <textarea id="userIntent" required placeholder="Опишите свои грязные намерения..." style="width:100%; padding:10px; background:#222; border:1px solid #444; color:#fff; border-radius:4px; min-height: 80px; resize: vertical; font-family: inherit;"></textarea>
+        </label>
+
+        <label style="display:flex; flex-direction:column; gap:5px; font-size: 14px;">5) Если вы служили другим кланам ранее, назовите их, иначе молчите.
+          <textarea id="userPastClans" placeholder="Список кланов (или оставьте пустым, если молчите)..." style="width:100%; padding:10px; background:#222; border:1px solid #444; color:#fff; border-radius:4px; min-height: 60px; resize: vertical; font-family: inherit;"></textarea>
+        </label>
+
+        <label style="display:flex; flex-direction:column; gap:5px; font-size: 14px;">6) Дайте краткую характеристику вашей ничтожной особы.
+          <textarea id="userChar" required placeholder="Пара слов о себе..." style="width:100%; padding:10px; background:#222; border:1px solid #444; color:#fff; border-radius:4px; min-height: 80px; resize: vertical; font-family: inherit;"></textarea>
+        </label>
+
+        <label style="display:flex; flex-direction:column; gap:5px; font-size: 14px;">7) Если вы осмелитесь попросить работу на моем королевском сервере, укажите должность.
+          <input type="text" id="userJob" placeholder="Какая должность интересует (или оставьте пустым)..." style="width:100%; padding:10px; background:#222; border:1px solid #444; color:#fff; border-radius:4px; font-family: inherit;">
+        </label>
+
+        <button type="submit" style="padding:12px; background:#fff; color:#000; border:none; border-radius:4px; font-weight:bold; cursor:pointer; margin-top:10px; transition: 0.2s;">Отправить офицерам</button>
       </form>
     </div>
   </div>

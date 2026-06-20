@@ -22,14 +22,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // ОТПРАВКА ФОРМЫ НА БЭКЕНД
+    // ОТПРАВКА ОБНОВЛЕННОЙ АНКЕТЫ НА БЭКЕНД
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
+        // Собираем данные со всех 7 новых королевских полей
+        // .trim() убирает случайные пробелы по краям
         const applicationData = {
-            userNick: document.getElementById('userNick').value,
-            userSkill: document.getElementById('userSkill').value,
-            userDiscord: document.getElementById('userDiscord').value
+            userNick: document.getElementById('userNick').value.trim(),
+            userAge: document.getElementById('userAge').value.trim(),
+            userKills: document.getElementById('userKills').value.trim(),
+            userIntent: document.getElementById('userIntent').value.trim(),
+            // Если оставили пустым — подставляем дефолт, чтобы бэк не получил пустую строку
+            userPastClans: document.getElementById('userPastClans').value.trim() || 'Промолчал',
+            userChar: document.getElementById('userChar').value.trim(),
+            userJob: document.getElementById('userJob').value.trim() || 'Не осмелился просить'
         };
 
         try {
@@ -44,15 +51,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await response.json();
 
             if (data.ok) {
-                alert('Заявка успешно отправлена в штаб RN!');
-                form.reset(); // Очистить поля
+                alert('Ваша жалкая заявка отправлена на рассмотрение повелителю!');
+                form.reset(); // Очистить все 7 полей
                 modal.style.display = 'none'; // Закрыть окно
             } else {
-                alert('Ошибка сервера при отправке.');
+                alert('Ошибка сервера при отправке. Скорее всего бэк не обновился.');
             }
         } catch (error) {
             console.error('Ошибка сети:', error);
-            alert('Не удалось связаться с сервером.');
+            alert('Не удалось связаться с сервером. Проверь интернет или статус Render.');
         }
     });
 });
