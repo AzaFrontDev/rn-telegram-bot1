@@ -5,7 +5,7 @@ const express = require('express');
 const cors = require('cors');
 
 const token = '8734644018:AAHbhqi5KGARlIzT1HBNVekFX8vAWr6CL8U';
-const chatId = '-1003816042648'; // Группа офицеров RN
+const chatId = '-1003816042648'; // Группа офицеров RN (Супергруппа)
 
 const bot = new Telegraf(token);
 const app = express();
@@ -32,8 +32,8 @@ bot.start((ctx) => {
 // Хелп-фраза
 bot.hears(/что ты можешь/i, (ctx) => {
     ctx.replyWithMarkdown(
-        `🤖 *Мой функционал:*\n\n` +
-        `1. Я круглосуточно принимаю заявки с официального сайта RN и пересылаю их офицерам.\n` +
+        `🤖 *МОЙ ФУНКЦИОНАЛ:*\n\n` +
+        `1. Я круглосуточно принимаю новые жёсткие анкеты из 7 вопросов с официального сайта RN и пересылаю их офицерам.\n` +
         `2. Выдаю инфу по командам /rules и /roster.`
     );
 });
@@ -60,25 +60,44 @@ bot.command('roster', (ctx) => {
         `👑 <b>Глава клана:</b> Acecarslen\n` +
         `⭐ <b>Офицерский корпус:</b> Garou, Acecarslen, Hinderon\n\n` +
         `💻 <b>Разработчик системы:</b> ${developer}\n\n` +
-        `⚔️ <b>Основной ростер:</b> Набор открыт через сайт. Все новые заявки падают напрямую офицерам.`
+        `⚔️ <b>Основной ростер:</b> Набор открыт через официальный сайт!\n\n` +
+        `⚠️ <b>ВНИМАНИЕ КАНДИДАТАМ:</b>\n` +
+        `Вам придётся ответить на 7 вопросов о вашей ничтожной особе и намерениях. Каждая дерзкая заявка рассматривается офицерами в течение 5 минут. Готовьтесь обосновать свой скилл.`
     );
 });
 
 
 // ====================
-// ЗАЯВКИ С САЙТА VERCEL
+// ЗАЯВКИ С САЙТА VERCEL (ОБНОВЛЕННАЯ СТРУКТУРА)
 // ====================
 app.post('/api/apply', async (req, res) => {
-    console.log('-> Получен запрос с сайта! Формирую заявку...');
-    const { userNick, userSkill, userDiscord } = req.body;
+    console.log('-> Получен запрос с сайта! Формирую имперскую анкету...');
+    
+    // Принимаем все 7 новых полей от фронтенда
+    const { 
+        userNick, 
+        userAge, 
+        userKills, 
+        userIntent, 
+        userPastClans, 
+        userChar, 
+        userJob 
+    } = req.body;
+
+    // Собираем новый шаблон сообщения
+    const message = 
+        `🎖 *НОВАЯ ЗАЯВКА В КЛАН RN* 🎖\n\n` +
+        `👤 *1. Ник:* \`${userNick}\`\n` +
+        `⏳ *2. Возраст:* \`${userAge}\`\n` +
+        `⚔️ *3. Количество киллов:* \`${userKills}\`\n\n` +
+        `📜 *4. Намерения подданного:*\n_${userIntent}_\n\n` +
+        `🛡 *5. Прошлые кланы:*\n_${userPastClans}_\n\n` +
+        `🎭 *6. Характеристика особы:*\n_${userChar}_\n\n` +
+        `💼 *7. Запрос должности:*\n_${userJob}_\n\n` +
+        `⚠️ _Ваша жалкая заявка будет принята или отвергнута повелительным жестом в течение 5 минут._`;
+
     try {
-        await bot.telegram.sendMessage(chatId, 
-            `📝 *Новая заявка в клан RN!*\n\n` +
-            `👤 *Ник:* \`${userNick}\`\n` +
-            `🎮 *Скилл:* \`${userSkill}\`\n` +
-            `📱 *Дискорд:* \`${userDiscord}\``, 
-            { parse_mode: 'Markdown' }
-        );
+        await bot.telegram.sendMessage(chatId, message, { parse_mode: 'Markdown' });
         console.log('-> Заявка успешно переслана офицерам!');
         res.status(200).json({ ok: true });
     } catch (err) {
