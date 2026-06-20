@@ -5,7 +5,7 @@ const express = require('express');
 const cors = require('cors');
 
 const token = '8734644018:AAHbhqi5KGARlIzT1HBNVekFX8vAWr6CL8U';
-const chatId = '-5303053241'; // Группа офицеров RN
+const chatId = '-1003816042648'; // Группа офицеров RN
 
 const bot = new Telegraf(token);
 const app = express();

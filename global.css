@@ -1,0 +1,36 @@
+* {
+  box-sizing: border-box;
+  margin: 0; 
+  padding: 0;
+}
+
+body {
+  font-family: "Tenor Sans", "Arial", sans-serif;
+  margin: 0;
+  box-shadow: 0px 10px 25px 0px rgba(44, 39, 39, 0.15);
+  text-align: center;
+  background-color: #000000;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 1200px;
+  width: 100%;
+  padding: 0 15px;
+}
+
+.page-content__title,
+.info-card__tag,
+.info-card__link,
+.banner__title,
+.banner__text,
+.banner__link {
+  color: rgb(25, 143, 11);
+}
+
+.page-content__title {
+  font-size: 36px;
+  font-weight: 400;
+  text-transform: uppercase;
+  margin: 60px 0 40px;
+}
