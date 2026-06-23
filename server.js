@@ -4,8 +4,8 @@ const { Telegraf } = require('telegraf');
 const express = require('express');
 const cors = require('cors');
 
-const token = '8734644018:AAHbhqi5KGARlIzT1HBNVekFX8vAWr6CL8U';
-const chatId = '-5303053241'; // Группа офицеров RN
+const token = process.env.BOT_TOKEN;
+const chatId = process.env.CHAT_ID;
 
 const bot = new Telegraf(token);
 const app = express();
