@@ -50,12 +50,13 @@ bot.command('rules', (ctx) => {
 
 // КОМАНДА: СОСТАВ КЛАНА
 bot.command('roster', (ctx) => {
-    ctx.replyWithMarkdown(
-        `👥 *СОСТАВ КЛАНА RN*\n\n` +
-        `👑 *Лидер:* [Ник Лидера]\n` +
-        `⭐ *Офицеры:* [Ник Офицера 1], [Ник Офицера 2]\n` +
-        `💻 *Разработчик системы:* @${ctx.from.username || 'Фронтенд-Мастер'}\n\n` +
-        `⚔️ *Основной ростер:* Заявки обрабатываются в реальном времени.`
+    const username = ctx.from.username ? `@${ctx.from.username}` : 'Фронтенд-Мастер';
+    
+    ctx.replyWithHTML(
+        `👥 <b>СОСТАВ КЛАНА RN</b>\n\n` +
+        `👑 <b>Лидер:</b> Asano\n` +
+        `💻 <b>Технический директор:</b> ${username}\n\n` +
+        `⚔️ <b>Основной ростер:</b> Заявки обрабатываются через систему v5.0.`
     );
 });
 
@@ -64,17 +65,24 @@ bot.command('roster', (ctx) => {
 // ЗАЯВКИ С САЙТА VERCEL
 // ====================
 app.post('/api/apply', async (req, res) => {
-    console.log('-> Получен запрос с сайта! Формирую заявку...');
-    const { userNick, userSkill, userDiscord } = req.body;
+    console.log('-> Получен запрос с сайта! Формирую обновленную анкету из 7 полей...');
+    
+    // Деструктуризируем ровно те 7 ключей, которые шлет твой script.js
+    const { userNick, userAge, userKills, userIntent, userPastClans, userChar, userJob } = req.body;
+    
     try {
         await bot.telegram.sendMessage(chatId, 
-            `📝 *Новая заявка в клан RN!*\n\n` +
+            `📝 *Новая анкета в клан RN!*\n\n` +
             `👤 *Ник:* \`${userNick}\`\n` +
-            `🎮 *Скилл:* \`${userSkill}\`\n` +  
-            `📱 *Дискорд:* \`${userDiscord}\``, 
+            `🔞 *Возраст:* \`${userAge}\`\n` +
+            `⚔️ *Килы:* \`${userKills}\`\n` +
+            `🎯 *Цель прихода:* \`${userIntent}\`\n` +
+            `📜 *Прошлые кланы:* \`${userPastClans}\`\n` +
+            `🎭 *Характер:* \`${userChar}\`\n` +
+            `💼 *Желаемая должность:* \`${userJob}\``, 
             { parse_mode: 'Markdown' }
         );
-        console.log('-> Заявка успешно переслана офицерам!');
+        console.log('-> Твоя жалкая заявка успешно переслана в чат!');
         res.status(200).json({ ok: true });
     } catch (err) {
         console.error('Ошибка отправки в группу:', err.message);
