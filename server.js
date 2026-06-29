@@ -96,7 +96,7 @@ app.post('/api/apply', async (req, res) => {
 const PORT = process.env.PORT || 3000;
 
 // Render сам подставит сюда нужный URL твоего приложения в продакшене
-const RENDER_EXTERNAL_URL = process.env.RENDER_EXTERNAL_URL || 'https://твой-проект.onrender.com';
+const RENDER_EXTERNAL_URL = process.env.RENDER_EXTERNAL_URL || 'https://api.rn-clan.ru';
 
 app.listen(PORT, async () => {
     console.log(`2. Сервер открыт на порту ${PORT}`);
